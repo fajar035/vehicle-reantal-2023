@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./home.module.css";
 
-function index() {
+function Home() {
   return (
     <>
       <div className={styles.main}>
@@ -11,4 +11,4 @@ function index() {
   );
 }
 
-export default index;
+export default Home;

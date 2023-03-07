@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./loading.module.css";
 
-function index() {
+function Loading() {
   return (
     <div className={styles["body-spinner"]}>
       <div className={styles.feeder}>
@@ -13,4 +13,4 @@ function index() {
   );
 }
 
-export default index;
+export default Loading;

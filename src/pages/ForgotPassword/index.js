@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./forgot.module.css";
 
-function index() {
+function ForgotPassword() {
   return <div className={styles.main}>Forgot Password</div>;
 }
 
-export default index;
+export default ForgotPassword;

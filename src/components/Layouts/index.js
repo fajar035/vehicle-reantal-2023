@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
-function index() {
+function Layout() {
   return (
     <>
       <Navbar />
@@ -13,4 +13,4 @@ function index() {
   );
 }
 
-export default index;
+export default Layout;
