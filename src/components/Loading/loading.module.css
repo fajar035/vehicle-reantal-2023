@@ -1,0 +1,69 @@
+@keyframes fed {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-500%);
+    transform: translateX(-500%);
+  }
+  30%,
+  70% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(0) scale(2.5);
+    transform: translateX(0) scale(2.5);
+  }
+  40%,
+  60% {
+    -webkit-transform: translateX(0) scale(1.5);
+    transform: translateX(0) scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(500%);
+    transform: translateX(500%);
+  }
+}
+
+.body-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.feeder {
+  height: 50px;
+  position: relative;
+  width: 50px;
+}
+.feeder div {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: fed;
+  animation-name: fed;
+  -webkit-animation-fill-mode: backwards;
+  animation-fill-mode: backwards;
+  -webkit-animation-delay: calc(var(--delay) * 1s);
+  animation-delay: calc(var(--delay) * 1s);
+  background-color: #ffcd61;
+  border-radius: 100%;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.feeder div:nth-child(2),
+.feeder div:nth-child(3) {
+  -webkit-animation-name: feed;
+  animation-name: feed;
+}
+.feeder div:nth-child(2) {
+  --delay: 0.25;
+}
+.feeder div:nth-child(3) {
+  --delay: 0.5;
+}

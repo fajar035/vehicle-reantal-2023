@@ -1,0 +1,12 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: blue;
+}
+
+.title {
+  font-family: var(--playfair);
+  font-size: 20px;
+  color: var(--color-secondary);
+}

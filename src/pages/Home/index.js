@@ -1,8 +1,14 @@
 import React from "react";
-import "./Home.css";
+import styles from "./home.module.css";
 
-function Home() {
-  return <div className="main">Home</div>;
+function index() {
+  return (
+    <>
+      <div className={styles.main}>
+        <p className={styles.title}>Ini Home</p>
+      </div>
+    </>
+  );
 }
 
-export default Home;
+export default index;
