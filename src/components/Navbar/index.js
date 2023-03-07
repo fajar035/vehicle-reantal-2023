@@ -8,7 +8,7 @@ import { useState } from "react";
 import useWindowDimensions from "../../utils/hooks/useDimensions";
 
 function Navbar() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { width } = useWindowDimensions();
 
