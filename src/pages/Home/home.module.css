@@ -3,10 +3,19 @@
   align-items: center;
   justify-content: center;
   color: blue;
+  width: 100%;
+  height: 100vh;
+  background-color: red;
 }
 
 .title {
   font-family: var(--playfair);
   font-size: 20px;
   color: var(--color-secondary);
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    margin-top: 80px;
+  }
 }
