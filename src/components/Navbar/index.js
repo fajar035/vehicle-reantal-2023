@@ -6,9 +6,11 @@ import NavbarPublic from "./Public";
 import NavbarPrivate from "./Private";
 import { useState } from "react";
 import useWindowDimensions from "../../utils/hooks/useDimensions";
+import { useSelector } from "react-redux";
 
 function Navbar() {
-  const [isLogin, setIsLogin] = useState(false);
+  const token = useSelector((state) => state.auth.userData.token);
+
   const [isOpen, setIsOpen] = useState(false);
   const { width } = useWindowDimensions();
 
@@ -21,7 +23,7 @@ function Navbar() {
         <li>Vehicle Type</li>
         <li>History</li>
         <li>About</li>
-        {isLogin ? <NavbarPrivate /> : <NavbarPublic />}
+        {token ? <NavbarPrivate /> : <NavbarPublic />}
       </ul>
 
       {width <= 768 ? (
