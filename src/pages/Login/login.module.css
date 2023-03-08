@@ -110,16 +110,21 @@
   flex-direction: column;
 }
 
-.right h1 {
+.right h1,
+.right p {
   font-family: var(--nunito);
   font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 50px;
+  font-size: 30px;
+  /* margin-bottom: 50px; */
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   display: none;
+}
+
+.right h1 {
+  margin-bottom: 50px;
 }
 
 .right h1 img {
@@ -230,7 +235,8 @@
     display: block;
   }
 
-  .right h1 {
+  .right h1,
+  .right p {
     display: flex;
   }
 }

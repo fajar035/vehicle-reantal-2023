@@ -25,6 +25,7 @@ function Login() {
         </div>
 
         <div className={styles.right}>
+          <p>Login</p>
           <h1>
             Vehicle rental <img src={iconCars} alt="icon" width={50} />
           </h1>
