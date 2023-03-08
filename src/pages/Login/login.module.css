@@ -1,3 +1,249 @@
-.main {
-  color: blue;
+.wrapper-login {
+  width: 100%;
+  height: 100vh;
+  background: url("../../assets/images/bg-login.webp");
+  background-color: rgb(158, 158, 158);
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  position: relative;
+  display: flex;
+  padding: 130px;
+  flex-wrap: wrap;
+}
+
+.pole {
+  width: 1px;
+  height: 80%;
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  top: 10%;
+}
+
+.round1,
+.round2 {
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: white;
+  position: absolute;
+}
+
+.round1 {
+  top: 0;
+  left: -7px;
+}
+
+.round2 {
+  bottom: 0;
+  left: -7px;
+}
+
+.left,
+.right {
+  width: 50%;
+  height: 100%;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left p:nth-child(1) {
+  font-family: var(--playfair);
+  font-weight: 700;
+  font-size: 60px;
+  color: white;
+  margin-bottom: 50px;
+}
+
+.left p:nth-child(2) {
+  font-family: var(--nunito);
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.left button,
+.btn-register-mobile {
+  width: 370px;
+  height: 70px;
+  border-radius: 10px;
+  background-color: var(--color-secondary);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-register-mobile {
+  display: none;
+}
+
+.left button:hover,
+.right button:hover {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(248, 248, 248, 0.15) 0px 2px 6px 2px;
+}
+
+.left button a,
+.btn-register-mobile a {
+  width: 100%;
+  height: 100%;
+  font-family: var(--nunito);
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.right {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.right h1 {
+  font-family: var(--nunito);
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 50px;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.right h1 img {
+  background-image: none;
+  border-radius: 10px;
+  margin-left: 20px;
+}
+
+.right form {
+  display: flex;
+  flex-direction: column;
+}
+
+.right form input,
+.right button {
+  width: 405px;
+  height: 70px;
+  margin-bottom: 20px;
+}
+
+.right form input {
+  background: rgba(255, 255, 255, 0.26);
+  border-radius: 10px;
+  border: none;
+  padding: 20px;
+  font-family: var(--nunito);
+  font-size: 16px;
+  color: white;
+  font-weight: 700;
+}
+
+.right form input:focus {
+  background: rgba(255, 255, 255, 0.26);
+  outline: none;
+}
+
+.right form input:-webkit-autofill,
+.right form input:-webkit-autofill:hover,
+.right form input:-webkit-autofill:focus,
+.right form input:-webkit-autofill:active {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.right form input::placeholder {
+  font-family: var(--nunito);
+  font-size: 16px;
+  color: white;
+  font-weight: 700;
+}
+
+.link {
+  color: white;
+  margin-bottom: 2rem;
+  font-family: var(--mulish);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.right button {
+  border-radius: 10px;
+  border: none;
+  font-family: var(--nunito);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  cursor: pointer;
+}
+
+.right button img {
+  margin-right: 10px;
+}
+
+.right button:nth-child(2) {
+  background-color: var(--color-primary);
+}
+
+.right button:nth-child(3) {
+  background-color: white;
+}
+
+@media screen and (max-width: 1190px) {
+  .wrapper-login {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .pole {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .left {
+    display: none;
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .btn-register-mobile {
+    display: block;
+  }
+
+  .right h1 {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .right form {
+    width: 100%;
+  }
+
+  .right form input,
+  .right button {
+    width: 100%;
+    height: 70px;
+    margin-bottom: 20px;
+  }
 }
