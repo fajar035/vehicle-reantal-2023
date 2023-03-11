@@ -44,7 +44,7 @@
 .left,
 .right {
   width: 50%;
-  height: 100%;
+  height: auto;
 }
 
 .left {
@@ -183,7 +183,8 @@
   font-size: 16px;
 }
 
-.right button {
+.right button,
+.right form button {
   border-radius: 10px;
   border: none;
   font-family: var(--nunito);
@@ -197,11 +198,11 @@
   margin-right: 10px;
 }
 
-.right button:nth-child(4) {
+.right form button {
   background-color: var(--color-primary);
 }
 
-.right button:nth-child(5) {
+.right button {
   background-color: white;
 }
 

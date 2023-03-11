@@ -105,7 +105,7 @@ function Login() {
             <button type="submit">Login</button>
           </form>
 
-          <button>
+          <button className={styles["btn-login-google"]}>
             <img src={iconGoogle} alt="icon" width={16} />
             Login with Google
           </button>
