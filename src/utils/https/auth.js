@@ -2,7 +2,6 @@ import axios from "axios";
 
 export const loginApi = (body) => {
   const URL = process.env.REACT_APP_HOSTDEPLOY + "/auth/login";
-  console.log(body);
   return axios.post(URL, body);
 };
 

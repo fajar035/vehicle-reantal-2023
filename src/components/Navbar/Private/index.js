@@ -26,7 +26,7 @@ function NavbarPrivate() {
         if (type === "AUTH_LOGOUT_FULFILLED") {
           toast.success("Logout successfully ..", {
             position: "bottom-center",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,
@@ -36,7 +36,7 @@ function NavbarPrivate() {
           });
           const waitingToast = setTimeout(() => {
             return navigate("/");
-          }, 3000);
+          }, 2000);
           return waitingToast;
         }
       })

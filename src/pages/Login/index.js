@@ -40,7 +40,7 @@ function Login() {
         if (type === "AUTH_LOGIN_FULFILLED") {
           toast.success("Login successfully ..", {
             position: "bottom-center",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,
@@ -58,7 +58,7 @@ function Login() {
         if (err)
           return toast.error("Login failed, please check again ..", {
             position: "bottom-center",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,
