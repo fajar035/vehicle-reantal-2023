@@ -6,7 +6,12 @@ function index() {
   return (
     <>
       <div className={styles.main}>
-        <p className={styles.title}>Ini Home</p>
+        <p className={styles.title}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
+          beatae laudantium provident sunt? Exercitationem delectus totam
+          ratione rerum commodi similique vero minima, laudantium, saepe sit
+          doloribus nemo quaerat! Sunt, quas!
+        </p>
       </div>
     </>
   );
