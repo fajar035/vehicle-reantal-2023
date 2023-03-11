@@ -40,7 +40,7 @@
   position: absolute;
   display: flex;
   bottom: -97px;
-  left: -110px;
+  left: -65px;
   width: 170px;
   height: fit-content;
   background: #ffffff;
@@ -52,6 +52,7 @@
   opacity: 0;
   transition: 0.4s;
   z-index: 10;
+  padding-left: 0;
 }
 
 .open {
@@ -99,5 +100,6 @@
   .wrapper-menu {
     width: 270px;
     background-color: white;
+    left: -110px;
   }
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./private.module.css";
 import iconMsg from "../../../assets/icons/email.png";
 import profileDefault from "../../../assets/images/user_profile.webp";
+import Modal from "../../../components/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../../redux/actions/auth";
 import { toast } from "react-toastify";
@@ -14,6 +15,8 @@ function NavbarPrivate() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuProfile = () => setIsMenuOpen(!isMenuOpen);
+  const [show, setShow] = useState(false);
+  const handleModal = () => setShow(!show);
 
   const handlerLogout = (token) => {
     dispatch(logoutAction(token))
@@ -69,9 +72,16 @@ function NavbarPrivate() {
             isMenuOpen ? styles["open"] : null
           }`}>
           <li>Profile</li>
-          <li onClick={() => handlerLogout(token)}>Log Out</li>
+          <li onClick={handleModal}>Log Out</li>
         </ul>
       </li>
+      <Modal
+        show={show}
+        handleModal={handleModal}
+        handleAction={() => handlerLogout(token)}
+        title="Logout"
+        body="Are you sure ?"
+      />
     </>
   );
 }
