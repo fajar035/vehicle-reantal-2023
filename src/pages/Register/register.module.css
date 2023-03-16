@@ -197,11 +197,11 @@
   margin-right: 10px;
 }
 
-.right button:nth-child(4) {
+.right form button {
   background-color: var(--color-primary);
 }
 
-.right button:nth-child(5) {
+.right button {
   background-color: white;
 }
 
@@ -233,6 +233,7 @@
 
   .btn-register-mobile {
     display: block;
+    background-color: var(--color-secondary) !important;
   }
 
   .right h1,

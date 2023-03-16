@@ -14,3 +14,15 @@ export const logoutAction = (token) => {
     payload: logoutApi(token),
   };
 };
+
+export const expiredTokenAction = () => {
+  return {
+    type: ACTION_STRING.expiredToken,
+  };
+};
+
+export const refreshTokenAction = () => {
+  return {
+    type: ACTION_STRING.refreshToken,
+  };
+};

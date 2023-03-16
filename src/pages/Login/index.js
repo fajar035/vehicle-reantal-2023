@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./login.module.css";
 import Footer from "../../components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import iconGoogle from "../../assets/icons/icon_google.png";
 import iconCars from "../../assets/icons/icon-cars.webp";
-import { loginAction } from "../../redux/actions/auth";
+import { loginAction, refreshTokenAction } from "../../redux/actions/auth";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.userData.token);
+  const expiredToken = useSelector((state) => state.auth.userData.expired);
+
+  useEffect(() => {
+    if (token && !expiredToken) {
+      return navigate("/");
+    }
+  }, []);
 
   const [input, setInput] = useState({
     email: "",
@@ -38,20 +47,15 @@ function Login() {
         const { type } = res.action;
 
         if (type === "AUTH_LOGIN_FULFILLED") {
-          toast.success("Login successfully ..", {
-            position: "bottom-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "colored",
+          dispatch(refreshTokenAction());
+          return Swal.fire({
+            title: "Login Successfully",
+            showConfirmButton: true,
+            icon: "success",
+            confirmButtonText: "Ok",
+          }).then((props) => {
+            if (props.isConfirmed) return navigate("/");
           });
-          const waitingToast = setTimeout(() => {
-            return navigate("/");
-          }, 3000);
-          return waitingToast;
         }
       })
       .catch((err) => {

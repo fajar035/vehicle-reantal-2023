@@ -5,6 +5,8 @@ export const ACTION_STRING = {
   dataUser: "DATA_USER",
   updateUser: "UPDATE_USER",
   updateImageUser: "UPDATE_IMAGE",
+  expiredToken: "EXPIRED_TOKEN",
+  refreshToken: "REFRESH_TOKEN",
 
   pending: "_PENDING",
   fulfilled: "_FULFILLED",

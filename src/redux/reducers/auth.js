@@ -7,6 +7,7 @@ const initialState = {
     token: "",
     photo: "",
     role: "",
+    expired: false,
   },
   isPending: false,
   isFulfilled: false,
@@ -15,12 +16,31 @@ const initialState = {
   err: {},
 };
 const authReducer = (prevState = initialState, action) => {
-  const { authLogin, updateImageUser, authLogout } = ACTION_STRING;
+  const { authLogin, updateImageUser, authLogout, expiredToken, refreshToken } =
+    ACTION_STRING;
   const { Pending, Fulfilled, Rejected } = ActionType;
 
   // membuat logic berdasarkan action
 
   switch (action.type) {
+    case expiredToken:
+      var userData = {
+        ...prevState.userData,
+        expired: true,
+      };
+      return {
+        ...prevState,
+        userData,
+      };
+    case refreshToken:
+      var userData = {
+        ...prevState.userData,
+        expired: false,
+      };
+      return {
+        ...prevState,
+        userData,
+      };
     case authLogout.concat("_", Fulfilled):
       return {
         ...prevState,
@@ -55,6 +75,7 @@ const authReducer = (prevState = initialState, action) => {
         token: data.result.token,
         photo: data.result.photo,
         role: data.result.role,
+        expired: false,
       };
       return {
         ...prevState,
