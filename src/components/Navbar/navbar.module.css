@@ -25,6 +25,10 @@
 .menu > li {
   display: inline-block;
   margin: 0 20px;
+}
+
+.link {
+  text-decoration: none;
   font-family: var(--nunito);
   font-weight: 400;
   font-size: 16px;
@@ -35,7 +39,7 @@
   color: var(--color-select-header) !important;
 }
 
-.menu > li:hover {
+.link:hover {
   cursor: pointer;
   color: var(--color-primary);
 }

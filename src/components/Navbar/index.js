@@ -7,6 +7,7 @@ import NavbarPrivate from "./Private";
 import { useState } from "react";
 import useWindowDimensions from "../../utils/hooks/useDimensions";
 import { useSelector } from "react-redux";
+import { Link, useParams, useResolvedPath } from "react-router-dom";
 
 function Navbar() {
   const token = useSelector((state) => state.auth.userData.token);
@@ -14,15 +15,50 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { width } = useWindowDimensions();
 
+  const params = useResolvedPath();
+  const pathName = params.pathname;
+
   return (
     <nav className={styles.nav}>
       <img src={logo} alt="logo" />
 
       <ul className={`${styles["menu"]} ${isOpen ? styles.open : ""}`}>
-        <li className={styles.active}>Home</li>
-        <li>Vehicle Type</li>
-        <li>History</li>
-        <li>About</li>
+        <li>
+          <Link
+            className={`${styles.link} ${
+              pathName === "/" ? styles.active : ""
+            }`}
+            to="/">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`${styles.link} ${
+              pathName === "/vehicle-type" ? styles.active : ""
+            }`}
+            to="/vehicle-type">
+            Vehicle type
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`${styles.link} ${
+              pathName === "/history" ? styles.active : ""
+            }`}
+            to="/history">
+            History
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`${styles.link} ${
+              pathName === "/about" ? styles.active : ""
+            }`}
+            to="/about">
+            About
+          </Link>
+        </li>
         {token ? <NavbarPrivate /> : <NavbarPublic />}
       </ul>
 
