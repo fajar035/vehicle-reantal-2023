@@ -41,7 +41,7 @@
 .wrapper-form {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 40%;
   height: fit-content;
 }
 
@@ -75,7 +75,7 @@
 
 .location-date select,
 .location-date input {
-  width: 150px;
+  width: 200px;
   cursor: pointer;
 }
 
@@ -278,6 +278,7 @@
     margin-top: 80px;
     background-position: center;
     padding: 20px;
+    height: fit-content;
   }
 
   .wrapper-form {
@@ -310,17 +311,26 @@
   .wrapper-right {
     padding-left: 0 !important;
   }
+
+  .location-date {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .location-date select,
+  .location-date input {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .wrapper-form {
-    width: 70%;
     margin: 0;
   }
 
   .cover {
     margin-top: 80px;
-    padding: 20px;
+    padding: 20px !important;
   }
 
   .wrapper-left,
@@ -334,7 +344,7 @@
     padding: 50px 90px;
   }
   .wrapper-form {
-    width: 50%;
+    width: 60%;
   }
 
   .wrapper-left,
