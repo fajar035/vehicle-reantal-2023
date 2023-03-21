@@ -2,6 +2,7 @@
   position: relative;
   width: fit-content;
   height: fit-content;
+  margin-left: 100px !important;
 }
 
 .circle1 {
@@ -34,6 +35,7 @@
   border-radius: 100%;
   object-fit: cover;
   object-position: 100% 50%;
+  cursor: pointer;
 }
 
 .wrapper-menu {
@@ -50,13 +52,16 @@
   display: flex;
   flex-direction: column;
   opacity: 0;
-  transition: 0.4s;
+  transition: 0.3s;
   z-index: 10;
   padding-left: 0;
+  transform: translateY(-500px);
 }
 
 .open {
   opacity: 1;
+  transform: translateY(0);
+  /* display: block !important; */
 }
 
 .wrapper-menu li {
@@ -71,8 +76,17 @@
   color: #000000;
 }
 
-.wrapper-menu li:hover {
+.wrapper-menu li a {
+  text-decoration: none;
+  font-family: var(--poppins);
+  font-weight: 700;
+  color: #000000;
+}
+
+.wrapper-menu li:hover,
+.wrapper-menu li a:hover {
   color: var(--color-primary);
+  cursor: pointer;
 }
 
 .icon {
@@ -101,5 +115,9 @@
     width: 270px;
     background-color: white;
     left: -110px;
+  }
+
+  .wrapper-icon {
+    margin-left: 0 !important;
   }
 }

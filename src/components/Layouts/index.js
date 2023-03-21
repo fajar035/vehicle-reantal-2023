@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
@@ -11,6 +11,7 @@ function Layout() {
   const token = useSelector((state) => state.auth.userData.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   if (token.length !== 0) {
     const expirationTime = jwtDecode(token).exp * 1000 - 60000;
     const dateExpired = new Date(expirationTime);
@@ -34,6 +35,17 @@ function Layout() {
       });
     }
   }
+
+  useEffect(() => {
+    const body = document.querySelector("#main");
+
+    body.scrollIntoView(
+      {
+        behavior: "smooth",
+      },
+      500
+    );
+  }, []);
 
   return (
     <>

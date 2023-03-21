@@ -4,6 +4,7 @@ import iconMsg from "../../../assets/icons/email.png";
 import profileDefault from "../../../assets/images/user_profile.webp";
 import Modal from "../../../components/Modal";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { logoutAction } from "../../../redux/actions/auth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -71,7 +72,9 @@ function NavbarPrivate() {
           className={`${styles["wrapper-menu"]} ${
             isMenuOpen ? styles["open"] : null
           }`}>
-          <li>Profile</li>
+          <li>
+            <Link to="profile">Profile</Link>
+          </li>
           <li onClick={handleModal}>Log Out</li>
         </ul>
       </li>
