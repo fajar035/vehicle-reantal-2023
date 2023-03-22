@@ -5,6 +5,10 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import VehicleType from "./pages/Vehicles";
+import Popular from "./pages/Vehicles/Popular";
+import Cars from "./pages/Vehicles/Cars";
+import Bikes from "./pages/Vehicles/Bikes";
+import MotorBikes from "./pages/Vehicles/Motorbikes";
 import History from "./pages/History";
 import About from "./pages/About";
 import Profile from "./pages/Profile/index";
@@ -27,7 +31,15 @@ const MainRouter = () => {
               <Route path="/loading" element={<Loading />} />
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
-                <Route path="/vehicle-type" element={<VehicleType />} />
+                <Route path="/vehicle-type" element={<VehicleType />}>
+                  <Route path="/vehicle-type/popular" element={<Popular />} />
+                  <Route path="/vehicle-type/cars" element={<Cars />} />
+                  <Route path="/vehicle-type/bikes" element={<Bikes />} />
+                  <Route
+                    path="/vehicle-type/motorbikes"
+                    element={<MotorBikes />}
+                  />
+                </Route>
                 <Route path="/history" element={<History />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/profile" element={<Profile />} />
