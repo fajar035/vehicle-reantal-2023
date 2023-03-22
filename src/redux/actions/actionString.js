@@ -7,6 +7,8 @@ export const ACTION_STRING = {
   updateImageUser: "UPDATE_IMAGE",
   expiredToken: "EXPIRED_TOKEN",
   refreshToken: "REFRESH_TOKEN",
+  onLoading: "LOADING_ON",
+  offLoading: "LOADING_OFF",
 
   pending: "_PENDING",
   fulfilled: "_FULFILLED",

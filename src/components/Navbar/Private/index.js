@@ -6,6 +6,10 @@ import Modal from "../../../components/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutAction } from "../../../redux/actions/auth";
+import {
+  onLoadingAction,
+  offLoadingAction,
+} from "../../../redux/actions/loading";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -14,16 +18,16 @@ function NavbarPrivate() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const handleMenuProfile = () => setIsMenuOpen(!isMenuOpen);
   const [show, setShow] = useState(false);
+
   const handleModal = () => setShow(!show);
 
   const handlerLogout = (token) => {
+    dispatch(onLoadingAction());
     dispatch(logoutAction(token))
       .then((res) => {
         const { type } = res.action;
-
         if (type === "AUTH_LOGOUT_FULFILLED") {
           toast.success("Logout successfully ..", {
             position: "bottom-center",
@@ -38,10 +42,12 @@ function NavbarPrivate() {
           const waitingToast = setTimeout(() => {
             return navigate("/");
           }, 2000);
+          dispatch(offLoadingAction());
           return waitingToast;
         }
       })
       .catch((err) => {
+        dispatch(offLoadingAction());
         if (err)
           return toast.error("Logout failed, please check again ..", {
             position: "bottom-center",

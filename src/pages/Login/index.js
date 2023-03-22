@@ -6,14 +6,17 @@ import { Link, useNavigate } from "react-router-dom";
 import iconGoogle from "../../assets/icons/icon_google.png";
 import iconCars from "../../assets/icons/icon-cars.webp";
 import { loginAction, refreshTokenAction } from "../../redux/actions/auth";
+import { onLoadingAction, offLoadingAction } from "../../redux/actions/loading";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import Loading2 from "../../components/Loading2";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.userData.token);
   const expiredToken = useSelector((state) => state.auth.userData.expired);
+  const isLoading = useSelector((state) => state.loading.isLoading);
 
   useEffect(() => {
     if (token && !expiredToken) {
@@ -42,10 +45,11 @@ function Login() {
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
+    dispatch(onLoadingAction());
     dispatch(loginAction(input))
       .then((res) => {
         const { type } = res.action;
-
+        dispatch(offLoadingAction());
         if (type === "AUTH_LOGIN_FULFILLED") {
           dispatch(refreshTokenAction());
           return Swal.fire({
@@ -59,6 +63,7 @@ function Login() {
         }
       })
       .catch((err) => {
+        dispatch(offLoadingAction());
         if (err)
           return toast.error("Login failed, please check again ..", {
             position: "bottom-center",
@@ -75,6 +80,7 @@ function Login() {
 
   return (
     <>
+      {/* {isLoading ? <Loading2 /> : null} */}
       <section className={styles["wrapper-login"]}>
         <div className={styles.left}>
           <p>
