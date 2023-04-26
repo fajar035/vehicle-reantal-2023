@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const getUserIdApi = (token) => {
   const URL = process.env.REACT_APP_HOSTDEPLOY + "/users/detail";
+  console.log("token : ", token);
   return axios.get(URL, { headers: { "x-access-token": token } });
 };
 

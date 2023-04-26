@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 import Layout from "./components/Layouts";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -19,6 +20,7 @@ import { useSelector } from "react-redux";
 
 const MainRouter = () => {
   const isLoading = useSelector((state) => state.loading.isLoading);
+  const token = useSelector((state) => state.auth.userData.token);
 
   return (
     <>
@@ -40,9 +42,17 @@ const MainRouter = () => {
                     element={<MotorBikes />}
                   />
                 </Route>
-                <Route path="/history" element={<History />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/profile" element={<Profile />} />
+                {/* PRIVATE ROUTE */}
+                <Route
+                  path="/history"
+                  element={token.length !== 0 ? <History /> : <PrivateRoute />}
+                />
+                <Route
+                  path="/profile"
+                  element={token.length !== 0 ? <Profile /> : <PrivateRoute />}
+                />
+                {/* PRIVATE ROUTE */}
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

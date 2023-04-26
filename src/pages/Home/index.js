@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./home.module.css";
 import Card from "../../components/Card";
@@ -9,9 +9,13 @@ import vector2 from "../../assets/icons/vector2.png";
 import vector3 from "../../assets/icons/vector3.png";
 
 function index() {
+  const [location, setLocation] = useState("");
+
   const submitSearch = (e) => {
     e.preventDefault();
-    console.log(e.target.attributes);
+    console.log(e.target.location.value);
+    console.log(e.target.search_vehicle.value);
+    console.log(e.target.date.value);
   };
   return (
     <>
@@ -29,8 +33,8 @@ function index() {
               placeholder="Type the vehicle (ex. motorbike"
             />
             <div className={styles["location-date"]}>
-              <select name="location" id="location">
-                <option value="#" selected disabled>
+              <select name="location" id="location" defaultValue={location}>
+                <option value={""} disabled>
                   Choose Location
                 </option>
                 <option value="jakarta">Jakarta</option>
