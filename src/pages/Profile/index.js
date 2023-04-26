@@ -120,8 +120,12 @@ function index() {
                   <label>Display Name : </label>
                 </div>
                 <div className={styles["wrapper-input"]}>
-                  <input type="number" placeholder="Your phone number" />
-                  <label>DD/MM/YY</label>
+                  <input
+                    type="date"
+                    placeholder="DD/MM/YYYY"
+                    data-date-format="DD MMMM YYYY"
+                  />
+                  <label>MM/DD/YYYY</label>
                 </div>
               </div>
               <div className={styles["wrapper-btn"]}>
