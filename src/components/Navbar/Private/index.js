@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./private.module.css";
 import iconMsg from "../../../assets/icons/email.png";
 import profileDefault from "../../../assets/images/user_profile.webp";
-import Modal from "../../../components/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutAction } from "../../../redux/actions/auth";
@@ -12,6 +11,7 @@ import {
 } from "../../../redux/actions/loading";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function NavbarPrivate() {
   const token = useSelector((state) => state.auth.userData.token);
@@ -19,47 +19,54 @@ function NavbarPrivate() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleMenuProfile = () => setIsMenuOpen(!isMenuOpen);
-  const [show, setShow] = useState(false);
-
-  const handleModal = () => setShow(!show);
 
   const handlerLogout = (token) => {
     dispatch(onLoadingAction());
-    dispatch(logoutAction(token))
-      .then((res) => {
-        const { type } = res.action;
-        if (type === "AUTH_LOGOUT_FULFILLED") {
-          toast.success("Logout successfully ..", {
-            position: "bottom-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "colored",
+    Swal.fire({
+      title: "Are you sure you want to log out?",
+      showCancelButton: true,
+      confirmButtonText: "Logout",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        dispatch(logoutAction(token))
+          .then((res) => {
+            const { type } = res.action;
+            if (type === "AUTH_LOGOUT_FULFILLED") {
+              toast.success("Logout successfully ..", {
+                position: "bottom-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+              });
+              const waitingToast = setTimeout(() => {
+                return navigate("/");
+              }, 2000);
+              dispatch(offLoadingAction());
+              return waitingToast;
+            }
+          })
+          .catch((err) => {
+            dispatch(offLoadingAction());
+            if (err)
+              return toast.error("Logout failed, please check again ..", {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+              });
           });
-          const waitingToast = setTimeout(() => {
-            return navigate("/");
-          }, 2000);
-          dispatch(offLoadingAction());
-          return waitingToast;
-        }
-      })
-      .catch((err) => {
+      } else if (res.isDismissed) {
         dispatch(offLoadingAction());
-        if (err)
-          return toast.error("Logout failed, please check again ..", {
-            position: "bottom-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "colored",
-          });
-      });
+      }
+    });
   };
 
   return (
@@ -81,16 +88,9 @@ function NavbarPrivate() {
           <li>
             <Link to="profile">Profile</Link>
           </li>
-          <li onClick={handleModal}>Log Out</li>
+          <li onClick={() => handlerLogout(token)}>Log Out</li>
         </ul>
       </li>
-      <Modal
-        show={show}
-        handleModal={handleModal}
-        handleAction={() => handlerLogout(token)}
-        title="Logout"
-        body="Are you sure ?"
-      />
     </>
   );
 }
