@@ -12,7 +12,7 @@ import {
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-const host = process.env.REACT_APP_HOSTLOCAL;
+const host = process.env.REACT_APP_HOSTDEPLOY;
 
 function index() {
   const inputFileRef = useRef(null);
