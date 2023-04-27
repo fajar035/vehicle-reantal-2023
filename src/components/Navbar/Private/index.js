@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./private.module.css";
 import iconMsg from "../../../assets/icons/email.png";
 import profileDefault from "../../../assets/images/user_profile.webp";
@@ -13,13 +13,17 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+const host = process.env.REACT_APP_HOSTLOCAL;
+
 function NavbarPrivate() {
   const token = useSelector((state) => state.auth.userData.token);
+  const photo = useSelector((state) => state.auth.userData.photo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const handleMenuProfile = () => setIsMenuOpen(!isMenuOpen);
+  const [photoProfile, setPhotoProfile] = useState(profileDefault);
 
+  const handleMenuProfile = () => setIsMenuOpen(!isMenuOpen);
   const handlerLogout = (token) => {
     dispatch(onLoadingAction());
     Swal.fire({
@@ -69,6 +73,20 @@ function NavbarPrivate() {
     });
   };
 
+  const checkPhoto = async (photo) => {
+    if (photo) {
+      const fetchPhoto = host + photo;
+      const res = await fetch(fetchPhoto);
+      const status = res.status;
+      if (status === 404) return setPhotoProfile(profileDefault);
+    }
+  };
+
+  useEffect(() => {
+    checkPhoto(photo);
+    setPhotoProfile(host + photo);
+  }, [photo]);
+
   return (
     <>
       <li className={styles["wrapper-icon"]}>
@@ -76,11 +94,7 @@ function NavbarPrivate() {
         <div className={styles.circle1}>1</div>
       </li>
       <li className={styles["wrapper-img-profile"]} onClick={handleMenuProfile}>
-        <img
-          src={profileDefault}
-          alt="icon"
-          className={styles["profile-img"]}
-        />
+        <img src={photoProfile} alt="icon" className={styles["profile-img"]} />
         <ul
           className={`${styles["wrapper-menu"]} ${
             isMenuOpen ? styles["open"] : null

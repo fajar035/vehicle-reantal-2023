@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import Loading from "../../components/Loading";
 import imgProfile from "../../assets/images/user_profile.webp";
 import imgPencil from "../../assets/icons/pencil.svg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   getUserIdApi,
   updateUserApi,
@@ -11,10 +11,12 @@ import {
 } from "../../utils/https/user";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { updateUserAction } from "../../redux/actions/user";
 
-const host = process.env.REACT_APP_HOSTDEPLOY;
+const host = process.env.REACT_APP_HOSTLOCAL;
 
 function index() {
+  const dispatch = useDispatch();
   const inputFileRef = useRef(null);
   const token = useSelector((state) => state.auth.userData.token);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +35,7 @@ function index() {
         if (photo !== null && photo.length !== 0) {
           setPhotoProfile(host + res.data.result.photo);
         }
+        checkPhoto(photo);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -145,6 +148,7 @@ function index() {
       .then((res) => {
         fetchUser();
         goTop();
+        dispatch(updateUserAction(token));
         return toast.success("Successful profile update", {
           position: "bottom-right",
           autoClose: 3000,
@@ -174,6 +178,15 @@ function index() {
     setPhotoProfile(host + dataUser.photo);
     setIsGender(dataUser.gender);
     goTop();
+  };
+
+  const checkPhoto = async (photo) => {
+    if (photo) {
+      const fetchPhoto = host + photo;
+      const res = await fetch(fetchPhoto);
+      const status = res.status;
+      if (status === 404) return setPhotoProfile(imgProfile);
+    }
   };
 
   useEffect(() => {
