@@ -13,8 +13,6 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { updateUserAction } from "../../redux/actions/user";
 
-const host = process.env.REACT_APP_HOSTDEPLOY;
-
 function index() {
   const dispatch = useDispatch();
   const inputFileRef = useRef(null);
@@ -33,7 +31,7 @@ function index() {
         setIsLoading(false);
         setDataUser(res.data.result);
         if (photo !== null && photo.length !== 0) {
-          setPhotoProfile(host + res.data.result.photo);
+          setPhotoProfile(photo);
         }
         checkPhoto(photo);
       })
@@ -175,14 +173,14 @@ function index() {
   };
 
   const canselSubmit = () => {
-    setPhotoProfile(host + dataUser.photo);
+    setPhotoProfile(dataUser.photo);
     setIsGender(dataUser.gender);
     goTop();
   };
 
   const checkPhoto = async (photo) => {
     if (photo) {
-      const fetchPhoto = host + photo;
+      const fetchPhoto = photo;
       const res = await fetch(fetchPhoto);
       const status = res.status;
       if (status === 404) return setPhotoProfile(imgProfile);

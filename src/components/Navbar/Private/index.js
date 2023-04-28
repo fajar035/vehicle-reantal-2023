@@ -13,8 +13,6 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const host = process.env.REACT_APP_HOSTDEPLOY;
-
 function NavbarPrivate() {
   const token = useSelector((state) => state.auth.userData.token);
   const photo = useSelector((state) => state.auth.userData.photo);
@@ -75,7 +73,7 @@ function NavbarPrivate() {
 
   const checkPhoto = async (photo) => {
     if (photo) {
-      const fetchPhoto = host + photo;
+      const fetchPhoto = photo;
       const res = await fetch(fetchPhoto);
       const status = res.status;
       if (status === 404) return setPhotoProfile(profileDefault);
@@ -84,7 +82,7 @@ function NavbarPrivate() {
 
   useEffect(() => {
     checkPhoto(photo);
-    setPhotoProfile(host + photo);
+    setPhotoProfile(photo);
   }, [photo]);
 
   return (
