@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { updateUserAction } from "../../redux/actions/user";
 
-const host = process.env.REACT_APP_HOSTLOCAL;
+const host = process.env.REACT_APP_HOSTDEPLOY;
 
 function index() {
   const dispatch = useDispatch();

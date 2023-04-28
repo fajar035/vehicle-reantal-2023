@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const host = process.env.REACT_APP_HOSTLOCAL;
+const host = process.env.REACT_APP_HOSTDEPLOY;
 
 function NavbarPrivate() {
   const token = useSelector((state) => state.auth.userData.token);
