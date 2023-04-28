@@ -71,18 +71,21 @@ function NavbarPrivate() {
     });
   };
 
-  const checkPhoto = async (photo) => {
-    if (photo) {
-      const fetchPhoto = photo;
-      const res = await fetch(fetchPhoto);
-      const status = res.status;
-      if (status === 404) return setPhotoProfile(profileDefault);
-    }
-  };
+  // const checkPhoto = async (photo) => {
+  //   console.log("PHOTO : ", photo);
+  //   if (photo === null) return setPhotoProfile(profileDefault);
+  //   if (photo) {
+  //     const fetchPhoto = photo;
+  //     const res = await fetch(fetchPhoto);
+  //     const status = res.status;
+  //     if (status === 404) return setPhotoProfile(profileDefault);
+  //   }
+  // };
 
   useEffect(() => {
-    checkPhoto(photo);
-    setPhotoProfile(photo);
+    if (photo !== null) {
+      setPhotoProfile(photo);
+    }
   }, [photo]);
 
   return (
