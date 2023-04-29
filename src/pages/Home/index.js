@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./home.module.css";
 import Card from "../../components/Card";
@@ -7,9 +7,51 @@ import iconStar from "../../assets/icons/vector4.png";
 import photoUser from "../../assets/images/comment_users.webp";
 import vector2 from "../../assets/icons/vector2.png";
 import vector3 from "../../assets/icons/vector3.png";
+import {
+  getLocationApi,
+  getVehiclesPopularApi,
+} from "../../utils/https/vehicle";
 
 function index() {
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState([]);
+  const [vehiclePopular, setVehiclePopular] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectLocation, setSelecetLocation] = useState("Location");
+  const [selectCategory, setSelectCategory] = useState("Category");
+
+  const getLocation = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getLocationApi();
+      if (res) {
+        const { result } = res.data;
+        setLocation(result);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getVehiclePopular = useCallback(() => {
+    getVehiclesPopularApi()
+      .then((res) => {
+        const popular = res.data.result;
+        const uniqueVehicle = [
+          ...new Map(popular.map((m) => [m.id_vehicle, m])).values(),
+        ];
+
+        setVehiclePopular(uniqueVehicle);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    getLocation();
+    getVehiclePopular();
+  }, []);
 
   const submitSearch = (e) => {
     e.preventDefault();
@@ -30,15 +72,26 @@ function index() {
             <input
               type="text"
               name="search_vehicle"
+              autoComplete="off"
               placeholder="Type the vehicle (ex. motorbike"
             />
             <div className={styles["location-date"]}>
-              <select name="location" id="location" defaultValue={location}>
-                <option value={""} disabled>
+              <select
+                name="location"
+                id="location"
+                defaultValue={selectLocation}
+                className={styles["location"]}>
+                <option value={selectLocation} disabled>
                   Choose Location
                 </option>
-                <option value="jakarta">Jakarta</option>
-                <option value="depok">Depok</option>
+                {location.length !== 0 &&
+                  location.map((item, idx) => {
+                    return (
+                      <option value={item.location} key={item.id}>
+                        {item.location}
+                      </option>
+                    );
+                  })}
               </select>
 
               <input type="date" name="date" />
@@ -53,12 +106,19 @@ function index() {
               View All <UilAngleRight className={styles["link-icon"]} />
             </Link>
           </div>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {vehiclePopular.length !== 0 &&
+            vehiclePopular.map((item, idx) => {
+              const photo = JSON.parse(item.photo);
+
+              return (
+                <Card
+                  key={idx}
+                  vehicleName={item.vehicle}
+                  vehicleImage={photo}
+                  city={item.location}
+                />
+              );
+            })}
         </div>
 
         <div className={styles["wrapper-testimonial"]}>
