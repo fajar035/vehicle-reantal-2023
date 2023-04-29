@@ -135,6 +135,12 @@ function index() {
     if (selectedPhoto !== null) {
       body.append("photoUser", selectedPhoto, selectedPhoto.name);
     }
+    if (!isGender) {
+      return Swal.fire({
+        icon: "warning",
+        title: "Please update your profile",
+      });
+    }
     body.append("gender", isGender);
     body.append("email", e.target.email.value);
     body.append("address", e.target.address.value);
