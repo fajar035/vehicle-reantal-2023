@@ -3,7 +3,7 @@ import styles from "./private.module.css";
 import iconMsg from "../../../assets/icons/email.png";
 import profileDefault from "../../../assets/images/user_profile.webp";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { logoutAction } from "../../../redux/actions/auth";
 import {
   onLoadingAction,
@@ -18,11 +18,16 @@ function NavbarPrivate() {
   const photo = useSelector((state) => state.auth.userData.photo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [photoProfile, setPhotoProfile] = useState(profileDefault);
 
   const handleMenuProfile = () => setIsMenuOpen(!isMenuOpen);
   const handlerLogout = (token) => {
+    const { pathname } = location;
+    if (pathname === "/profile") {
+      navigate("/");
+    }
     dispatch(onLoadingAction());
     Swal.fire({
       title: "Are you sure you want to log out?",
