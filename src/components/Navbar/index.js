@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./navbar.module.css";
 import logo from "../../assets/icons/logo.svg";
 import { Squash } from "hamburger-react";
@@ -7,7 +7,7 @@ import NavbarPrivate from "./Private";
 import { useState } from "react";
 import useWindowDimensions from "../../utils/hooks/useDimensions";
 import { useSelector } from "react-redux";
-import { Link, useParams, useResolvedPath } from "react-router-dom";
+import { Link, useResolvedPath } from "react-router-dom";
 
 function Navbar() {
   const token = useSelector((state) => state.auth.userData.token);
@@ -17,6 +17,10 @@ function Navbar() {
 
   const params = useResolvedPath();
   const pathName = params.pathname;
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathName]);
 
   return (
     <nav className={styles.nav}>

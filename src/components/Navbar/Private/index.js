@@ -21,10 +21,10 @@ function NavbarPrivate() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [photoProfile, setPhotoProfile] = useState(profileDefault);
+  const { pathname } = location;
 
   const handleMenuProfile = () => setIsMenuOpen(!isMenuOpen);
   const handlerLogout = (token) => {
-    const { pathname } = location;
     if (pathname === "/profile") {
       navigate("/");
     }
