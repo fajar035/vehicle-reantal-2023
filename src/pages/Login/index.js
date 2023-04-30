@@ -16,7 +16,6 @@ function Login() {
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.userData.token);
   const expiredToken = useSelector((state) => state.auth.userData.expired);
-  const isLoading = useSelector((state) => state.loading.isLoading);
 
   useEffect(() => {
     if (token && !expiredToken) {

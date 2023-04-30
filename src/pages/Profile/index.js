@@ -307,7 +307,7 @@ function index() {
                   className={styles.reset}
                   type="reset"
                   onClick={canselSubmit}>
-                  Cansel
+                  Cancel
                 </button>
               </div>
             </form>

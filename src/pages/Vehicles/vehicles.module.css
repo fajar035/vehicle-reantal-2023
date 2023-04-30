@@ -15,7 +15,7 @@
   border: 0.8px solid #afb0b9;
   border-radius: 6px;
   overflow: hidden;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .wrapper-search input {
@@ -62,7 +62,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 100px 0;
+  margin-bottom: 50px;
 }
 
 .title span {
