@@ -34,6 +34,7 @@ function index() {
   };
 
   const getVehiclePopular = useCallback(() => {
+    setIsLoading(true);
     getVehiclesPopularApi()
       .then((res) => {
         const popular = res.data.result;
@@ -42,8 +43,10 @@ function index() {
         ];
 
         setVehiclePopular(uniqueVehicle);
+        setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
       });
   }, []);

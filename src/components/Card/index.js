@@ -3,24 +3,22 @@ import styles from "./styles.module.css";
 import vehicleDefault from "../../assets/images/vehicle-default.jpg";
 
 function index({ vehicleImage, vehicleName, city }) {
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState(vehicleDefault);
 
   useEffect(() => {
     if (vehicleImage) {
-      setPhoto(vehicleImage[2]);
+      setPhoto(vehicleImage[0]);
+    } else {
+      setPhoto(vehicleDefault);
     }
   }, []);
 
   return (
     <div className={styles.card}>
-      <img
-        src={vehicleImage !== null ? photo : vehicleDefault}
-        alt="vehicle"
-        className={styles["img-vehicle"]}
-      />
+      <img src={photo} alt="vehicle" className={styles["img-vehicle"]} />
       <div className={styles["wrapper-title"]}>
-        <span>{vehicleName}</span>
-        <span>{city}</span>
+        <span>{vehicleName || "Vechicle Name"}</span>
+        <span>{city || "Location"}</span>
       </div>
     </div>
   );
