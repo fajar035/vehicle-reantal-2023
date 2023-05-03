@@ -95,6 +95,7 @@ function index() {
                       vehicleName={popular.vehicle}
                       city={popular.location}
                       vehicleImage={JSON.parse(popular.photo)}
+                      data={popular}
                     />
                   ))}
               </div>
@@ -115,6 +116,8 @@ function index() {
                       vehicleName={car.name}
                       city={car.location}
                       vehicleImage={JSON.parse(car.photo)}
+                      id={car.id}
+                      data={car}
                     />
                   ))}
               </div>
@@ -135,6 +138,7 @@ function index() {
                       vehicleName={motorBike.name}
                       city={motorBike.location}
                       vehicleImage={JSON.parse(motorBike.photo)}
+                      data={motorBike}
                     />
                   ))}
               </div>
@@ -155,6 +159,7 @@ function index() {
                       vehicleName={bike.name}
                       city={bike.location}
                       vehicleImage={JSON.parse(bike.photo)}
+                      data={bike}
                     />
                   ))}
               </div>

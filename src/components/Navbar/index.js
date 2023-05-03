@@ -15,8 +15,9 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { width } = useWindowDimensions();
 
-  const params = useResolvedPath();
-  const pathName = params.pathname;
+  const resolvePath = useResolvedPath();
+  const pathName = resolvePath.pathname;
+  const type = pathName.includes("/vehicle-type");
 
   useEffect(() => {
     setIsOpen(false);
@@ -39,7 +40,7 @@ function Navbar() {
         <li>
           <Link
             className={`${styles.link} ${
-              pathName === "/vehicle-type" ? styles.active : ""
+              pathName === "/vehicle-type" || type ? styles.active : ""
             }`}
             to="/vehicle-type">
             Vehicle type

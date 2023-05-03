@@ -122,6 +122,7 @@ function index() {
                     vehicleName={item.vehicle}
                     vehicleImage={photo}
                     city={item.location}
+                    data={item}
                   />
                 );
               })}
