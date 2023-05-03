@@ -8,7 +8,11 @@ function index({ vehicleImage, vehicleName, city, data }) {
   const [photo, setPhoto] = useState(vehicleDefault);
 
   const handlerLink = () =>
-    navigate(`/vehicle-type/${data.category.toLowerCase()}/${data.id}`);
+    navigate(
+      `/vehicle-type/${data.category.toLowerCase()}/${
+        data.id_vehicle ? data.id_vehicle : data.id
+      }`
+    );
 
   useEffect(() => {
     if (vehicleImage) {

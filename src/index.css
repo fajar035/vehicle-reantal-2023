@@ -37,6 +37,13 @@ body::-webkit-scrollbar-track {
   background-color: #423f3e;
 }
 
+.icon {
+  position: relative !important;
+  margin: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
 .modal {
   backdrop-filter: blur(10px);
   font-family: var(--nunito);
