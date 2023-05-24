@@ -52,24 +52,10 @@
 }
 
 .wrapper-history {
-  width: 50rem;
+  width: 100%;
   height: fit-content;
   position: relative;
   display: flex;
-  align-items: center;
-  /* justify-content: center; */
-}
-
-.btn-delete {
-  z-index: 0;
-  position: absolute;
-  width: 100px;
-  height: 50px;
-  right: 0;
-  font-family: var(--nunito);
-  font-weight: 700;
-  color: var(--color-secondary);
-  background-color: var(--color-primary);
-  border-radius: 10px;
-  border: none;
+  flex-direction: column;
+  gap: 50px;
 }
