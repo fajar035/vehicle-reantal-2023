@@ -18,6 +18,7 @@ function Navbar() {
   const resolvePath = useResolvedPath();
   const pathName = resolvePath.pathname;
   const type = pathName.includes("/vehicle-type");
+  const typeReservation = pathName.includes("/reservation");
 
   useEffect(() => {
     setIsOpen(false);
@@ -40,7 +41,9 @@ function Navbar() {
         <li>
           <Link
             className={`${styles.link} ${
-              pathName === "/vehicle-type" || type ? styles.active : ""
+              pathName === "/vehicle-type" || type || typeReservation
+                ? styles.active
+                : ""
             }`}
             to="/vehicle-type">
             Vehicle type

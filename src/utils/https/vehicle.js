@@ -25,7 +25,7 @@ export const getVehiclesApi = (params) => {
 };
 
 export const getVehiclesPopularApi = () => {
-  const url = process.env.REACT_APP_HOSTLOCAL + "/history/popular";
+  const url = process.env.REACT_APP_HOSTLOCAL + "/history/vehicles/popular";
   return axios.get(url);
 };
 
@@ -92,7 +92,7 @@ export const getVehicleByIdApi = (id) => {
 };
 
 export const getVehiclePopularIdApi = (id) => {
-  const url = process.env.REACT_APP_HOSTLOCAL + "/history/popular/" + id;
+  const url = process.env.REACT_APP_HOSTLOCAL + "/history/" + id;
   return axios.get(url);
 };
 

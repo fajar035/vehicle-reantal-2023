@@ -108,7 +108,7 @@ function index() {
           <div className={styles["wrapper-popular"]}>
             <div className={styles["wrapper-title"]}>
               <p className={styles["title-popular"]}>Popular in town</p>
-              <Link className={styles.link}>
+              <Link className={styles.link} to="/vehicle-type/popular">
                 View All <UilAngleRight className={styles["link-icon"]} />
               </Link>
             </div>

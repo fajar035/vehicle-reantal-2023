@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import vehicleDefault from "../../assets/images/vehicle-default.jpg";
 import { useNavigate } from "react-router-dom";
 
-function index({ vehicleImage, vehicleName, city, data }) {
+function index({ vehicleImage, vehicleName, data }) {
   const navigate = useNavigate();
   const [photo, setPhoto] = useState(vehicleDefault);
 
@@ -29,7 +29,7 @@ function index({ vehicleImage, vehicleName, city, data }) {
       </div>
       <div className={styles["wrapper-title"]}>
         <span>{vehicleName || "Vechicle Name"}</span>
-        <span>{city || "Location"}</span>
+        <span>{data.location || "Location"}</span>
       </div>
     </div>
   );

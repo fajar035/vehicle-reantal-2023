@@ -11,6 +11,8 @@ import Vehicle from "./pages/Vehicles/Vehicle";
 import History from "./pages/History";
 import About from "./pages/About";
 import Profile from "./pages/Profile/index";
+import Reservation from "./pages/Reservation";
+import Payment from "./pages/Payment";
 import Loading from "./components/Loading2";
 import ErrorPage from "./pages/ErrorPage";
 import ScrollToTop from "./utils/hooks/scrollToTop";
@@ -40,6 +42,9 @@ const MainRouter = () => {
                     element={<Vehicle />}
                   />
                   <Route path="/vehicle-type/:type/:id" element={<Detail />} />
+                </Route>
+                <Route path="/reservation" element={<Reservation />}>
+                  <Route path="/reservation/payment" element={<Payment />} />
                 </Route>
                 <Route path="/about" element={<About />} />
                 {/* PRIVATE ROUTE */}

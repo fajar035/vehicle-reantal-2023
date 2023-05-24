@@ -24,9 +24,13 @@ function index({ dataPhoto }) {
 
   return (
     <div className={styles.main}>
-      <img src={wordData && wordData} height="300" width="500" />
+      <img src={wordData && wordData} />
       <div className={styles.flex_row}>
-        <button onClick={() => handlerPrev()} className={styles["btn-handler"]}>
+        <button
+          onClick={() => handlerPrev()}
+          className={`${styles["btn-handler"]} ${
+            index === 0 ? styles.disable : ""
+          }`}>
           <UilAngleLeft className={`icon ${styles["icon-size"]}`} />
         </button>
         {dataPhoto &&
@@ -37,12 +41,14 @@ function index({ dataPhoto }) {
                 <img
                   className={dataPhoto[i] == i ? styles.clicked : ""}
                   src={data}
-                  height="100"
-                  width="150"
                 />
               </div>
             ))}
-        <button onClick={() => handlerNext()} className={styles["btn-handler"]}>
+        <button
+          onClick={() => handlerNext()}
+          className={`${styles["btn-handler"]} ${
+            index === 2 ? styles.disable : ""
+          }`}>
           <UilAngleRight className={`icon ${styles["icon-size"]}`} />
         </button>
       </div>
