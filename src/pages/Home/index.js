@@ -62,6 +62,7 @@ function index() {
     console.log(e.target.search_vehicle.value);
     console.log(e.target.date.value);
   };
+
   return (
     <>
       {isLoading ? (
@@ -112,10 +113,9 @@ function index() {
                 View All <UilAngleRight className={styles["link-icon"]} />
               </Link>
             </div>
-            {vehiclePopular.length !== 0 &&
+            {vehiclePopular.length !== 0 ? (
               vehiclePopular.map((item, idx) => {
                 const photo = JSON.parse(item.photo);
-
                 return (
                   <Card
                     key={idx}
@@ -125,7 +125,14 @@ function index() {
                     data={item}
                   />
                 );
-              })}
+              })
+            ) : (
+              <>
+                <div className={styles["data_not_found"]}>
+                  <p>Data not found</p>
+                </div>
+              </>
+            )}
           </div>
 
           <div className={styles["wrapper-testimonial"]}>

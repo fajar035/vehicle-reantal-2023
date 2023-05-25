@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import moment from "moment";
+import Swal from "sweetalert2";
+import { updateRatingHistoryApi } from "../../utils/https/history";
+import { UilStar } from "@iconscout/react-unicons";
 
-function index({ history, id, deleteHistory, token }) {
+function index({ history, id, deleteHistory, token, handleRating }) {
   const [isHover, setIsHover] = useState(false);
 
   const handleDate = (startDate, endDate) => {
@@ -11,6 +14,70 @@ function index({ history, id, deleteHistory, token }) {
     const month = moment(startDate).format("MMM");
     const year = moment(startDate).format("YYYY");
     return `${month} ${day1} - ${day2} ${year}`;
+  };
+
+  const submitRating = () => {
+    return Swal.fire({
+      title: "Give Rating",
+      input: "select",
+      inputPlaceholder: "Select a rating",
+      inputOptions: {
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+      },
+      allowOutsideClick: false,
+      showCancelButton: true,
+    }).then((result) => {
+      const { value } = result;
+      handleRating(value);
+      const body = {
+        rating: value,
+      };
+
+      return updateRatingHistoryApi(id, body, token)
+        .then((res) => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "bottom",
+            timer: 5000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+          });
+          return Toast.fire({
+            title: "Successfully provide a rating, Thanks you ...",
+            icon: "success",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          return Swal.fire({
+            title: "Something when wrong ...",
+            icon: "error",
+            showConfirmButton: true,
+            allowOutsideClick: false,
+          });
+        });
+    });
+  };
+
+  const renderStar = (rating) => {
+    let arr = [];
+    for (let i = 1; i <= rating; i++) {
+      arr.push(i);
+    }
+
+    return (
+      <>
+        {rating !== null &&
+          arr.length !== 0 &&
+          arr.map((item) => (
+            <UilStar key={item} className={`icon ${styles.customIcon}`} />
+          ))}
+      </>
+    );
   };
 
   return (
@@ -29,12 +96,24 @@ function index({ history, id, deleteHistory, token }) {
             </div>
           </div>
           <div className={styles["wrapper-detail"]}>
-            <p>{history.vehicle}</p>
-            <p>{handleDate(history.booking_date, history.return_date)}</p>
-            <p>{`Prepayment : Rp.${history.total_price}`}</p>
-            <p>{`Qty : ${history.qty}`}</p>
+            <p className={styles.title}>{history.vehicle}</p>
+            <p className={styles.date}>
+              {handleDate(history.booking_date, history.return_date)}
+            </p>
+            <p
+              className={
+                styles.price
+              }>{`Prepayment : Rp.${history.total_price}`}</p>
+            <p className={styles.qty}>{`Qty : ${history.qty}`}</p>
+            <p>Rating : {renderStar(history.rating)}</p>
           </div>
         </div>
+        <button
+          type="button"
+          className={styles["btn-rating"]}
+          onClick={submitRating}>
+          Rating
+        </button>
         <button
           type="button"
           className={styles["btn-delete"]}

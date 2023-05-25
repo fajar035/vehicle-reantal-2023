@@ -27,7 +27,6 @@ export const deleteHistoryApi = (id, token) => {
 };
 
 export const updateRatingHistoryApi = (id, body, token) => {
-  console.log(body);
   const url = process.env.REACT_APP_HOSTLOCAL + "/history/" + id;
   return axios.patch(url, body, {
     headers: { "x-access-token": token },

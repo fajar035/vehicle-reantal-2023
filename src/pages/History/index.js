@@ -13,10 +13,10 @@ function index() {
   const [history, setHistory] = useState({});
   const [stateSearch, setStateSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [updatedRating, setUpdatedRating] = useState(0);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("#");
   const handleSetState = (setState) => (e) => setState(e.targer.value);
-  // console.log(history);
 
   const getHistory = async () => {
     setIsLoading(true);
@@ -37,15 +37,14 @@ function index() {
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      return Swal.fire({
-        title: "Something when wrong ..",
-        text: error,
-        icon: "error",
-        showConfirmButton: true,
-        allowOutsideClick: false,
-      });
     }
   };
+
+  const handleUpdateRating = (rating) => setUpdatedRating(rating);
+
+  useEffect(() => {
+    getHistory();
+  }, [updatedRating]);
 
   const deleteHistory = (id, token) => {
     Swal.fire({
@@ -77,43 +76,56 @@ function index() {
         <Loading />
       ) : (
         <section className={styles["container"]}>
-          <div className={styles["wrapper-filter-search"]}>
-            <div className={styles["wrapper-search"]}>
-              <input
-                type="text"
-                placeholder="Search history"
-                onChange={(e) => handleSetState(setStateSearch(e.target.value))}
-              />
-              <UilSearch
-                className={`icon`}
-                onClick={() => setSearch(stateSearch)}
-              />
-            </div>
-            <select
-              className={styles["dropdown-filter"]}
-              defaultValue={filter}
-              onChange={(e) => handleSetState(setFilter(e.target.value))}>
-              <option value="#" disabled>
-                Filter
-              </option>
-              <option value="car">Car</option>
-              <option value="bike">Bike</option>
-              <option value="motorbike">Motorbike</option>
-            </select>
-          </div>
-          <span className={styles.line}></span>
-          <div className={styles["wrapper-history"]}>
-            {Object.keys(history).length !== 0 &&
-              history.result.map((item, idx) => (
-                <CardHistory
-                  key={idx}
-                  history={item}
-                  id={item.id}
-                  token={token}
-                  deleteHistory={deleteHistory}
-                />
-              ))}
-          </div>
+          {Object.keys(history).length !== 0 ? (
+            <>
+              <div className={styles["wrapper-filter-search"]}>
+                <div className={styles["wrapper-search"]}>
+                  <input
+                    type="text"
+                    placeholder="Search history"
+                    onChange={(e) =>
+                      handleSetState(setStateSearch(e.target.value))
+                    }
+                  />
+                  <UilSearch
+                    className={`icon`}
+                    onClick={() => setSearch(stateSearch)}
+                  />
+                </div>
+                <select
+                  className={styles["dropdown-filter"]}
+                  defaultValue={filter}
+                  onChange={(e) => handleSetState(setFilter(e.target.value))}>
+                  <option value="#" disabled>
+                    Filter
+                  </option>
+                  <option value="car">Car</option>
+                  <option value="bike">Bike</option>
+                  <option value="motorbike">Motorbike</option>
+                </select>
+              </div>
+              <span className={styles.line}></span>
+              <div className={styles["wrapper-history"]}>
+                {Object.keys(history).length !== 0 &&
+                  history.result.map((item, idx) => (
+                    <CardHistory
+                      key={idx}
+                      history={item}
+                      id={item.id}
+                      token={token}
+                      deleteHistory={deleteHistory}
+                      handleRating={handleUpdateRating}
+                    />
+                  ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={styles["data_not_found"]}>
+                <p>Data not found</p>
+              </div>
+            </>
+          )}
         </section>
       )}
     </>

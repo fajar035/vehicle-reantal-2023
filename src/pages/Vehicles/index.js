@@ -41,13 +41,10 @@ function index() {
         ...paramCategory,
         filterCategory: "motorbike",
       });
-      const getPopulars = await getVehiclesPopularApi();
-      // popular di ambil dari user yang memberi rating 5, dan remove yang ber rating 5 sama
-      const dataPopular = removeDuplicate(getPopulars?.data.result);
+
       setVehicleCar(getCars.data.result);
       setVehicleBike(getBikes.data.result);
       setVehicleMotorBike(getMotorBike.data.result);
-      setVehiclePopular(dataPopular);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -55,9 +52,22 @@ function index() {
     }
   };
 
+  const getVehiclePopular = async () => {
+    try {
+      const res = await getVehiclesPopularApi();
+      const dataPopular = removeDuplicate(res?.data.result);
+      setVehiclePopular(dataPopular);
+    } catch (error) {
+      setVehiclePopular([]);
+    }
+  };
+
   useEffect(() => {
     getVehicle();
+    getVehiclePopular();
   }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -88,7 +98,7 @@ function index() {
                 </Link>
               </div>
               <div className={styles["wrapper-card"]}>
-                {vehiclePopular !== 0 &&
+                {vehiclePopular.length !== 0 ? (
                   vehiclePopular.map((popular, idx) => (
                     <Card
                       key={idx}
@@ -97,7 +107,14 @@ function index() {
                       vehicleImage={JSON.parse(popular.photo)}
                       data={popular}
                     />
-                  ))}
+                  ))
+                ) : (
+                  <>
+                    <div className={styles["data_not_found"]}>
+                      <p>Data Not Found</p>
+                    </div>
+                  </>
+                )}
               </div>
               <div className={styles.title}>
                 <span>Cars</span>
