@@ -41,6 +41,9 @@ function index() {
   };
 
   const handleUpdateRating = (rating) => setUpdatedRating(rating);
+  const handleSearch = () => {
+    setSearch(stateSearch);
+  };
 
   useEffect(() => {
     getHistory();
@@ -88,8 +91,8 @@ function index() {
                     }
                   />
                   <UilSearch
-                    className={`icon`}
-                    onClick={() => setSearch(stateSearch)}
+                    className={`icon ${styles.iconCostum}`}
+                    onClick={handleSearch}
                   />
                 </div>
                 <select

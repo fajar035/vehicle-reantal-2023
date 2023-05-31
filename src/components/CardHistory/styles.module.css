@@ -95,3 +95,60 @@
   font-family: var(--nunito);
   font-weight: 500;
 }
+
+@media screen and (max-width: 768px) {
+  .card-hover {
+    width: 84%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container-card {
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .btn-delete {
+    z-index: 5;
+    left: 10px;
+    bottom: 10px;
+  }
+
+  .btn-rating {
+    z-index: 5;
+    bottom: 10px;
+    right: 10px;
+    top: auto;
+  }
+
+  .btn-delete,
+  .btn-rating {
+    display: none;
+    transition: 0.3s;
+  }
+
+  .card-hover {
+    width: 100%;
+  }
+
+  .card-hover2 {
+    padding-bottom: 5rem;
+  }
+
+  .btn-hover {
+    display: block;
+  }
+
+  .wrapper-card {
+    flex-direction: column;
+    gap: 20px;
+    height: fit-content;
+    /* justify-content: center; */
+  }
+
+  .wrapper-img {
+    align-self: center;
+  }
+}

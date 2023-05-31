@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import moment from "moment";
 import Swal from "sweetalert2";
@@ -7,6 +7,14 @@ import { UilStar } from "@iconscout/react-unicons";
 
 function index({ history, id, deleteHistory, token, handleRating }) {
   const [isHover, setIsHover] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
+  const updateDimensions = () => {
+    setWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
 
   const handleDate = (startDate, endDate) => {
     const day1 = moment(startDate).format("D");
@@ -88,7 +96,11 @@ function index({ history, id, deleteHistory, token, handleRating }) {
         onMouseLeave={() => setIsHover(false)}>
         <div
           className={`${styles["wrapper-card"]} ${
-            isHover ? styles["card-hover"] : ""
+            isHover && width >= 768
+              ? styles["card-hover"]
+              : isHover && width < 550
+              ? styles["card-hover2"]
+              : ""
           }`}>
           <div className={styles["wrapper-img"]}>
             <div className={styles["wrapper-img"]}>
@@ -110,13 +122,17 @@ function index({ history, id, deleteHistory, token, handleRating }) {
         </div>
         <button
           type="button"
-          className={styles["btn-rating"]}
+          className={`${styles["btn-rating"]} ${
+            isHover ? styles["btn-hover"] : ""
+          }`}
           onClick={submitRating}>
           Rating
         </button>
         <button
           type="button"
-          className={styles["btn-delete"]}
+          className={`${styles["btn-delete"]} ${
+            isHover ? styles["btn-hover"] : ""
+          }`}
           onClick={() => deleteHistory(id, token)}>
           Delete
         </button>
