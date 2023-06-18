@@ -103,8 +103,8 @@
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 100px 0;
-  justify-content: space-between;
+  gap: 50px 50px;
+  justify-content: center;
   align-items: center;
   margin-bottom: 120px;
 }

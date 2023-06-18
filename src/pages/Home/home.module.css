@@ -61,7 +61,32 @@
   height: fit-content;
 }
 
-.wrapper-form input,
+.wrapper-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  height: fit-content;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
+
+.input-search {
+  background-color: transparent;
+  border: none;
+
+  padding: 10px;
+  font-family: var(--nunito);
+  font-size: 16px;
+  color: #4a4c53;
+  font-weight: 700;
+  width: 100%;
+}
+
+.input-date,
 .location-date select {
   background: rgba(255, 255, 255, 0.4);
   border-radius: 10px;
@@ -71,14 +96,16 @@
   font-size: 16px;
   color: #4a4c53;
   font-weight: 700;
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
-.wrapper-form input::placeholder {
+.input-date::placeholder,
+.input-search::placeholder {
   color: #4a4c53 !important;
 }
 
-.wrapper-form input:focus,
+.input-date:focus,
+.input-search:focus,
 .location:focus {
   outline: none;
 }
@@ -101,7 +128,7 @@
 
 .location-date select,
 .location-date input {
-  width: 200px;
+  width: 45%;
   cursor: pointer;
 }
 
@@ -166,6 +193,15 @@
   height: 30px;
   position: inherit;
   margin: 0;
+  cursor: pointer;
+  transition: 0.3s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.active-icon {
+  opacity: 1;
+  visibility: visible;
 }
 
 .wrapper-testimonial {
@@ -346,6 +382,10 @@
   .location-date select,
   .location-date input {
     width: 100%;
+  }
+
+  .wrapper-input input {
+    width: 85%;
   }
 }
 

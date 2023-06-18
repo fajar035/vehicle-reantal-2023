@@ -20,7 +20,7 @@ function index({ vehicleImage, vehicleName, data }) {
     } else {
       setPhoto(vehicleDefault);
     }
-  }, []);
+  }, [data]);
 
   return (
     <div className={styles["container-card"]} onClick={handlerLink}>
