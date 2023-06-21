@@ -19,7 +19,9 @@ function index({ searchRef, isSearch, handleIsSearch, data }) {
   useEffect(() => {
     if (isSearch) {
       getSearchVehicle(data);
-      handleIsSearch();
+      if (handleIsSearch) {
+        handleIsSearch();
+      }
     }
   }, [isSearch]);
 
