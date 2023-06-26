@@ -9,7 +9,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { inject } from "@vercel/analytics";
 
+inject();
 const root = ReactDOM.createRoot(document.getElementById("main"));
 
 root.render(
