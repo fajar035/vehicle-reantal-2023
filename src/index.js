@@ -9,9 +9,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { inject } from "@vercel/analytics";
+import { Analytics } from "@vercel/analytics/react";
 
-inject();
 const root = ReactDOM.createRoot(document.getElementById("main"));
 
 root.render(
@@ -19,6 +18,7 @@ root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <MainRouter />
+        <Analytics />
         <ToastContainer
           position="bottom-center"
           autoClose={5000}
